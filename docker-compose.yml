@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  app:
+    image: fercyto/foodfy_rs_4.0.0
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    container_name: foodfy_rs_4.0.0_app
+    restart: always
+    ports:
+      - 5010:5010
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: foodfy_rs_4.0.0_db
+    environment:
+      POSTGRES_USER: fernando
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./db_foodfy/foodfy_4.0.0.sql:/docker-entrypoint-initdb.d/foodfy_4.0.0.sql
+      - ./db_foodfy/data:/var/lib/postgresql/data
+      - ./db_foodfy/files:/home
+    expose:
+      - "5434" 
+    ports:
+      - "5434:5434"
+    command: -p 5434
+
+
+
