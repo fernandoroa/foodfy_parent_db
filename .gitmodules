@@ -1,0 +1,3 @@
+[submodule "foodfy_persistent"]
+	path = foodfy_persistent
+	url = https://github.com/fernandoroa/foodfy_rs_challenge.git
